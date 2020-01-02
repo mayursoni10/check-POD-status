@@ -1,0 +1,15 @@
+import requests
+import sys
+headers = {
+    'Authorization': sys.argv[1]
+}
+apis = ["policies", "mercator", "uws", "watches", "vessels", "notifications", "lookup", "arm", "odyssea",
+        "quest_analytics", "catalogue", "templates", "documentation", "claims", "claims_analytics",
+        "profitability_analytics", "reference_data", "users", "scheduler", "notes",
+        "customer-data"]
+for x in apis:
+    response = requests.get(sys.argv[2]+'/' + x + '/' + 'info', headers=headers)
+    if response.status_code == 200:
+        print(x + " is up")
+    else:
+        print("Response code :" + str(response.status_code) + " for service " + x)
